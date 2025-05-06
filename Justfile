@@ -17,12 +17,14 @@ build-rust:
   cargo build --release
 
 # Build and release the multi-arch library
-release: clean
+release: clean build-native-library
   @echo "Building and releasing multi-arch library..."
-  # First do the release
+  # Copy the library to the package directory
+  mkdir -p target/package/dbmaters-0.1.2/build
+  cp build/libdbmaters.* target/package/dbmaters-0.1.2/build/
+  # Do the release
   cargo release --execute
-  # Then build the libraries
-  just build-native-library
+  # Build the Rust library
   just build-rust
 
 # Clean up build artifacts

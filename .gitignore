@@ -1,3 +1,4 @@
-build
-target/
+/target
+/build
+**/*.rs.bk
 Cargo.lock

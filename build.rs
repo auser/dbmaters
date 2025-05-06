@@ -1,9 +1,15 @@
 fn main() {
-    let path = "./build";
-    let lib = "dbmaters";
+    // Look for the library in both the package root and the build directory
+    let paths = vec![
+        std::env::var("CARGO_MANIFEST_DIR").unwrap(),
+        std::env::var("CARGO_MANIFEST_DIR").unwrap() + "/build",
+    ];
 
-    println!("cargo:rustc-link-search=native={}", path);
-    println!("cargo:rustc-link-lib=static={}", lib);
+    for path in paths {
+        println!("cargo:rustc-link-search=native={}", path);
+    }
+
+    println!("cargo:rustc-link-lib=static=dbmaters");
     println!("cargo:rustc-link-lib=pthread");
     println!("cargo:rustc-link-lib=dl");
 
@@ -13,6 +19,7 @@ fn main() {
         println!("cargo:rustc-link-lib=framework=Security");
     }
 
+    // Watch for changes in the library files
     println!("cargo:rerun-if-changed=build/libdbmaters.a");
     println!("cargo:rerun-if-changed=build/libdbmaters.h");
 }

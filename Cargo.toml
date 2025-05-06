@@ -7,6 +7,14 @@ authors = ["Ari Lerner <me@ari.io>"]
 license = "MIT"
 repository = "https://github.com/auser/dbmaters"
 links = "dbmaters"
+include = [
+  "src/**/*",
+  "build/**/*",
+  "Cargo.toml",
+  "build.rs",
+  "LICENSE",
+  "README.md",
+]
 
 [lib]
 name = "dbmaters"

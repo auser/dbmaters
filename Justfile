@@ -1,5 +1,5 @@
 BASE_GO_FLAGS := "-trimpath -ldflags=-buildmode=c-archive -ldflags=-s -ldflags=-w"
-VERSION := $(shell grep '^version = ' Cargo.toml | cut -d'"' -f2)
+VERSION := `grep '^version = ' Cargo.toml | cut -d'"' -f2`
 
 default:
   @just --list
@@ -19,10 +19,8 @@ build-rust:
 # Build and release the multi-arch library
 release: clean build-native-library build-rust
   @echo "Building and releasing multi-arch library..."
-  # Create build directory in package
-  mkdir -p target/package/dbmaters-{{VERSION}}/build
-  # Copy library files to package directory
-  cp build/libdbmaters.* target/package/dbmaters-{{VERSION}}/build/
+  # Ensure build directory exists and has the right files
+  mkdir -p build
   cargo release
 
 # Clean up build artifacts

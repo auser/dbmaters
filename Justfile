@@ -8,6 +8,7 @@ build-native-library:
   @echo "Building release executables (incl. cross compilation) ..."
   mkdir -p build
   cd golang && CGO_ENABLED=1 go build -buildmode=c-archive -o ../build/libdbmaters.a -ldflags="-s -w" main.go
+  mv build/libdbmaters.h build/libdbmaters.h
 
 # Build the Rust library  
 build-rust:

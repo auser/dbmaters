@@ -17,13 +17,13 @@ build-rust:
   cargo build --release
 
 # Build and release the multi-arch library
-release: clean build-native-library build-rust
+release: clean
   @echo "Building and releasing multi-arch library..."
   # First do the release
   cargo release --execute
-  # Then ensure build directory exists and copy files
-  mkdir -p build
-  cp golang/libdbmaters.* build/
+  # Then build the libraries
+  just build-native-library
+  just build-rust
 
 # Clean up build artifacts
 clean:

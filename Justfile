@@ -20,7 +20,7 @@ build-rust:
 # Build and release the multi-arch library
 release: clean build-go-static build-rust
   @echo "Building and releasing multi-arch library..."
-  cargo release --execute --no-verify --allow-dirty
+  @cargo publish --allow-dirty
 
 # Clean up build artifacts
 clean:

@@ -1,7 +1,7 @@
 module dbmaters
 
-go 1.24.1
+go 1.21
 
-require github.com/amacneil/dbmate/v2 v2.27.0
+require github.com/amacneil/dbmate/v2 v2.0.0
 
-require github.com/lib/pq v1.10.9 // indirect
+require github.com/lib/pq v1.10.9

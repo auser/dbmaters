@@ -5,25 +5,14 @@ pub mod error;
 pub use error::*;
 
 extern "C" {
-    fn CreateAndMigrate(path: GoString) -> *const c_char;
-}
-
-#[repr(C)]
-struct GoString {
-    a: *const c_char,
-    b: i64,
+    fn CreateAndMigrate(path: *const c_char) -> *const c_char;
 }
 
 pub fn create_and_migrate(path: &str) -> Result<String, DbMatersError> {
     let c_path = CString::new(path).expect("Failed to convert path to CString");
     let ptr = c_path.as_ptr();
 
-    let go_str = GoString {
-        a: ptr,
-        b: path.len() as i64,
-    };
-
-    let result = unsafe { CreateAndMigrate(go_str) };
+    let result = unsafe { CreateAndMigrate(ptr) };
     let c_str = unsafe { CStr::from_ptr(result) };
 
     let string = c_str

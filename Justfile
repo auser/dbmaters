@@ -19,9 +19,11 @@ build-rust:
 # Build and release the multi-arch library
 release: clean build-native-library build-rust
   @echo "Building and releasing multi-arch library..."
-  # Ensure build directory exists and has the right files
+  # First do the release
+  cargo release --execute
+  # Then ensure build directory exists and copy files
   mkdir -p build
-  cargo release --execute --allow-dirty
+  cp golang/libdbmaters.* build/
 
 # Clean up build artifacts
 clean:

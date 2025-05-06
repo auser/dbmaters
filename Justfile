@@ -21,7 +21,7 @@ release: clean build-native-library build-rust
   @echo "Building and releasing multi-arch library..."
   # Ensure build directory exists and has the right files
   mkdir -p build
-  cargo release
+  cargo release --execute
 
 # Clean up build artifacts
 clean:

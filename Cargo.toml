@@ -3,17 +3,21 @@ name = "dbmaters"
 version = "0.1.0"
 edition = "2021"
 description = "A Rust library for database migrations using dbmate"
-authors = ["John Doe <john.doe@example.com>"]
+authors = ["Ari Lerner <me@ari.io>"]
 license = "MIT"
-repository = "https://github.com/dbmate/dbmaters"
+repository = "https://github.com/auser/dbmaters"
 links = "dbmaters"
 
 [lib]
 name = "dbmaters"
 path = "src/lib.rs"
+crate-type = ["cdylib"]
 
 [dependencies]
-
+libc = "0.2"
 
 [build-dependencies]
 cc = "1.0"
+
+[dev-dependencies]
+cargo-make = "0.37.3"

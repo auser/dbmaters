@@ -1,3 +1,6 @@
+//go:build linux || darwin
+// +build linux darwin
+
 package main
 
 /*
@@ -22,8 +25,6 @@ func CreateAndMigrate(path unsafe.Pointer) unsafe.Pointer {
 	}
 	db := dbmate.New(u)
 	db.AutoDumpSchema = false
-	db.MigrationsDir = "./db/migrations"
-	db.SchemaFile = "./db/schema.sql"
 	err = db.Migrate()
 	if err != nil {
 		return unsafe.Pointer(C.CString(err.Error()))
